@@ -2,6 +2,10 @@ const express=require('express');
 const app=express();
 const userRoute=require('./routes/user.route')
 const bussinessRoute=require('./routes/bussiness.route')
+const adminRoute=require('./routes/admin.route')
+const db=require('./db/db.config')
+const bcrypt=require('bcrypt')
+const jwt=require('jsonwebtoken')
 const cors=require('cors');
 
 const corsOptions={
@@ -9,9 +13,30 @@ const corsOptions={
 }
 
 app.use(cors(corsOptions));
+const seedAdmin=async()=>{
+    const admin=await db.query('SELECT * FROM user WHERE userrole=?',['admin'])
+    if(!admin){
+        try{
+            const hashpassword=await bcrypt.hash('admin',10)
+            const newadmin=await db.query('INSERT INTO user (accountname,email,accountpassword,userrole) VALUES (?,?,?,?)',['admin','admin@gmail.com',hashpassword,'admin'])
+
+            console.log('admin seeded')
+        }catch(err){
+            console.log(err)
+        }
+    }else{
+        const user=await db.query('SELECT * FROM user WHERE userrole=?',['admin'])
+        console.log(user)
+        console.log('admin already exists')
+    }
+}
+seedAdmin()
+
+
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use('/user',userRoute)
 app.use('/bussiness',bussinessRoute)
+app.use('/admin',adminRoute)
 
 module.exports=app;

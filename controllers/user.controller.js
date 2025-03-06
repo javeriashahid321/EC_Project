@@ -1,7 +1,6 @@
 const db = require('../db/db.config')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const { use } = require('../routes/user.route')
 module.exports.signup = async function (req, res, next) {
     const { username, email, password } = req.body
     const hashpassword = await bcrypt.hash(password, 10)
@@ -25,7 +24,7 @@ module.exports.login=async function (req,res,next) {
     const {ppassword,pemail}=req.body
     const role='personal'
     try{
-        const user=await db.query('SELECT id,accountpassword FROM user WHERE email=? AND userrole=?',[pemail,role])
+        const user=await db.query('SELECT id,accountpassword,userrole FROM user WHERE email=? AND userrole=?',[pemail,role])
         console.log(user)
         const userId=user[0][0].id
         if(user.length){
