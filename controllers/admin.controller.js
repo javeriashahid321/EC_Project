@@ -30,11 +30,16 @@ module.exports.login=async function (req,res,next){
 }
 
 module.exports.catagoryAdd=async function(req,res,next){
-    const {catagName,description}=req.body
+    const { categoryName, fields } = req.body;
+
+    const fieldsJSON = JSON.stringify(fields);
+    console.log("Category Name:", categoryName)
+    console.log("Fields JSON:", fieldsJSON);
+
     try{
-        await db.query('INSERT INTO catagory (catagoryname,description) VALUES (?,?)',[catagName,description])
+        await db.query('INSERT INTO categories (name,fields) VALUES (?,?)',[categoryName,fieldsJSON])
         res.status(200).json({
-            message:'catagory added successfully'
+            message:'Category Added Successfully'
         })
     }catch(err){
         next(err)

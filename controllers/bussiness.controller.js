@@ -52,7 +52,7 @@ module.exports.login=async function (req,res,next) {
 
 module.exports.getCategories=async function (req,res,next){
     try{
-        const categories=await db.query('SELECT * FROM catagory')
+        const categories=await db.query('SELECT * FROM categories')
         // console.log(typeof(categories[0]))
         res.status(200).json({
             categories
