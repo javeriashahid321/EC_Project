@@ -1,0 +1,34 @@
+const addProductData = require('../../../lib/product/addProductData')
+const cloudinary = require('cloudinary').v2
+
+cloudinary.config({
+    cloud_name: 'dxhqouszq',
+    api_key: '864435449977183',
+    api_secret: 'nbi2qOEgb9j11Os_RdVHRfeDbhY'
+});
+
+const addProduct = async function (req, res, next) {
+    try {
+        const { title, description, isused, price } = req.body
+        const userid = req.user.id
+        const image = req.files.image
+        const result = await cloudinary.uploader.upload(image.tempFilePath)
+        const fields = JSON.parse(req.body.fields);
+        console.log('fields', fields)
+
+        const product = {
+            title, description, price, fields, isused, userid, result
+        }
+        const queryresult = await addProductData(product)
+        const insertid = queryresult.insertId
+        console.log(insertid)
+        res.status(200).json({
+            message: "post added successfully",
+            insertid
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports = addProduct
