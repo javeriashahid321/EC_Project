@@ -15,4 +15,17 @@ CREATE TABLE categories (
     name VARCHAR(255) NOT NULL,
     fields JSON NOT NULL  
 );
-DELETE FROM categories where id=1;
+CREATE TABLE items
+(
+id  int auto_increment PRIMARY KEY,
+title varchar(255),
+description text,
+price varchar(255),
+fields JSON NOT NULL,
+isused tinyint,
+userid int not null,
+image text not null,
+foreign key (userid) references user(id),
+created_at timestamp default current_timestamp
+)
+SELECT * FROM items WHERE id=1
