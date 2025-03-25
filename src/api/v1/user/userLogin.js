@@ -2,8 +2,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const checkUserPass = require('../../../lib/user/checkUserPass')
 const userLogin = async function (req, res, next) {
-    const { password, email } = req.body
-    const role = 'personal'
+    const { password, email,role } = req.body
     const userInfo = {
         password, email, role
     }

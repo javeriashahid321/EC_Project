@@ -4,10 +4,9 @@ const addUser = require('../../../lib/user/addUser')
 
 
 const userSignup = async function (req, res, next) {
-    const { name, email, password } = req.body
+    const { name, email, password,role } = req.body
     console.log('req.body',req.body)
     const hashpassword = await bcrypt.hash(password, 10)
-    const role = 'personal'
     const user = { name, email, hashpassword, role }
     try {
         const id = await addUser(user)

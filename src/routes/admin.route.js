@@ -1,10 +1,10 @@
 const router=require('express').Router()
-const adminLogin=require('../api/v1/user/adminLogin')
+const userLogin=require('../api/v1/user/userLogin')
 
 
 
 
-router.post('/login',adminLogin)
+router.post('/login',userLogin)
 // router.post('/catagory',adminController.catagoryAdd)
 
 

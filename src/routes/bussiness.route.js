@@ -1,8 +1,8 @@
 const router=require('express').Router()
-const bussinessSignup=require('../api/v1/bussiness/bussinessSignup')
-const bussinessLogin=require('../api/v1/bussiness/bussinessLogin')
+const userSignup=require('../api/v1/user/userSignup')
+const userLogin=require('../api/v1/user/userLogin')
 
-router.post('/signup',bussinessSignup)
-router.post('/login',bussinessLogin)
+router.post('/signup',userSignup)
+router.post('/login',userLogin)
 
 module.exports=router
