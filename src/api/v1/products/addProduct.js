@@ -2,9 +2,9 @@ const addProductData = require('../../../lib/product/addProductData')
 const cloudinary = require('cloudinary').v2
 
 cloudinary.config({
-    cloud_name: 'dxhqouszq',
-    api_key: '864435449977183',
-    api_secret: 'nbi2qOEgb9j11Os_RdVHRfeDbhY'
+    cloud_name: process.env.cloud_name,
+    api_key: process.env.api_key,
+    api_secret: process.env.api_secret
 });
 
 const addProduct = async function (req, res, next) {
