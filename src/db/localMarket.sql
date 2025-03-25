@@ -15,6 +15,17 @@ CREATE TABLE categories (
     name VARCHAR(255) NOT NULL,
     fields JSON NOT NULL  
 );
+INSERT INTO categories (name, fields) VALUES 
+('HandiCraft', 
+ '[{"name": "Worktype", "options": ["Sindhi", "Balochi", "Peshawari"]}]');
+INSERT INTO categories (name, fields) VALUES 
+('Cloths', 
+ '[{"name": "Gender", "options": ["Male", "Femlae", "Kids"]}]');
+
+INSERT INTO categories (name, fields) VALUES 
+('Furniture', 
+ '[{"name": "Condition", "options": ["Old", "New"]}]');
+
 CREATE TABLE items
 (
 id  int auto_increment PRIMARY KEY,
